@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스터디픽 · 390x844 미리보기</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #05070d;
+      }
+      iframe {
+        display: block;
+        width: 390px;
+        height: 844px;
+        border: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- QA 전용: 실제 배포본을 390x844 뷰포트(아이폰 14/15 기준)로 확인하는 페이지 -->
+    <iframe id="app" src="/#/timer" title="스터디픽 미리보기"></iframe>
+    <script>
+      var tab = new URLSearchParams(location.search).get('tab') || 'timer';
+      document.getElementById('app').src = '/#/' + tab;
+    </script>
+  </body>
+</html>
