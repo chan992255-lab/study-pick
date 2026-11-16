@@ -8,8 +8,8 @@ import type { SubjectId, TimerMode } from '../lib/types';
 import { formatDuration, formatToday, formatTimer, percent } from '../lib/format';
 import { streakDays, todaySessions, totals } from '../lib/stats';
 
-const RING_SIZE = 264;
-const RING_STROKE = 12;
+const RING_SIZE = 232;
+const RING_STROKE = 11;
 const RING_RADIUS = (RING_SIZE - RING_STROKE) / 2;
 const RING_CIRC = 2 * Math.PI * RING_RADIUS;
 const MIN_SAVE_SECONDS = 10;
@@ -124,12 +124,12 @@ export function TimerPage({ onOpenAuth }: { onOpenAuth: () => void }) {
   const isCounting = running || elapsed > 0;
 
   return (
-    <div className="space-y-4 pt-4">
+    <div className="space-y-3.5 pt-3">
       {storeMode === 'guest' && (
         <button
           type="button"
           onClick={onOpenAuth}
-          className="flex w-full items-center gap-3 rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] px-4 py-3 text-left transition hover:bg-cyan-400/[0.12]"
+          className="flex w-full items-center gap-2.5 rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] px-3.5 py-2.5 text-left transition hover:bg-cyan-400/[0.12]"
         >
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-cyan-400/15 text-cyan-200">
             <Sparkles className="h-[18px] w-[18px]" />
@@ -219,7 +219,7 @@ export function TimerPage({ onOpenAuth }: { onOpenAuth: () => void }) {
       </div>
 
       {/* 타이머 링 */}
-      <section className="app-card flex flex-col items-center px-4 pb-5 pt-6">
+      <section className="app-card flex flex-col items-center px-4 pb-4 pt-5">
         <div className="relative" style={{ width: RING_SIZE, height: RING_SIZE }}>
           <svg width={RING_SIZE} height={RING_SIZE} className="-rotate-90">
             <circle
@@ -254,7 +254,7 @@ export function TimerPage({ onOpenAuth }: { onOpenAuth: () => void }) {
               <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: meta.color }} />
               {meta.label}
             </span>
-            <p className="tabular mt-2 text-[46px] font-extrabold leading-none tracking-tight text-white">
+            <p className="tabular mt-2 text-[40px] font-extrabold leading-none tracking-tight text-white">
               {formatTimer(displaySeconds)}
             </p>
             <p className="mt-2 text-[12px] font-medium text-slate-400">
@@ -274,7 +274,7 @@ export function TimerPage({ onOpenAuth }: { onOpenAuth: () => void }) {
           </div>
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-6">
+        <div className="mt-5 flex items-center justify-center gap-5">
           <button
             type="button"
             onClick={resetTimer}
@@ -302,12 +302,7 @@ export function TimerPage({ onOpenAuth }: { onOpenAuth: () => void }) {
             <Check className="h-5 w-5" />
           </button>
         </div>
-        <div className="mt-2 flex w-full max-w-[260px] items-center justify-between px-1 text-[10.5px] font-semibold text-slate-500">
-          <span>초기화</span>
-          <span className="-ml-1">{running ? '일시정지' : '시작'}</span>
-          <span>완료 저장</span>
-        </div>
-        <p className="mt-3 text-center text-[11px] leading-relaxed text-slate-500">
+        <p className="mt-2.5 text-center text-[11px] leading-relaxed text-slate-500">
           {canSave
             ? '완료 저장을 누르면 오늘 기록에 남습니다.'
             : `10초 이상 공부하면 기록을 저장할 수 있어요.`}
