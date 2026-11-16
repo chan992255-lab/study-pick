@@ -70,6 +70,8 @@ export function AuthModal({ open, initialMode = 'signup', onClose }: AuthModalPr
         await signIn(trimmedEmail, password);
         toast('로그인했어요. 어느 기기에서든 이어서 공부할 수 있어요.', 'success');
       }
+      setNickname('');
+      setEmail('');
       setPassword('');
       onClose();
     } catch (err) {

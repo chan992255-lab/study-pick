@@ -30,6 +30,15 @@ export default function App() {
   const todaySeconds = useMemo(() => totals(todaySessions(sessions)).totalSeconds, [sessions]);
 
   useEffect(() => {
+    const titles: Record<Tab, string> = {
+      timer: '공부 타이머',
+      tasks: '과목·할 일',
+      stats: '공부 통계',
+    };
+    document.title = `${titles[tab]} | 스터디픽 StudyPick`;
+  }, [tab]);
+
+  useEffect(() => {
     const onHash = () => setTab(readTabFromHash());
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
