@@ -201,12 +201,19 @@ create policy "study_tasks own delete"
 -- 7. 권한 — 로그인 사용자에게만 테이블 접근 권한 부여
 -- ---------------------------------------------------------------------
 grant usage on schema public to anon, authenticated;
-grant select, insert, update, delete
-  on public.study_settings, public.study_sessions, public.study_tasks
-  to authenticated;
 
 -- 비로그인(anon)은 어떤 개인 기록도 읽을 수 없다.
 revoke all on public.study_settings, public.study_sessions, public.study_tasks from anon;
+
+-- Supabase 기본 권한에는 TRUNCATE·REFERENCES·TRIGGER 도 들어 있어서,
+-- 행 단위 RLS 가 적용되지 않는 TRUNCATE 권한은 걷어내고 DML 만 남긴다.
+revoke truncate, references, trigger
+  on public.study_settings, public.study_sessions, public.study_tasks
+  from authenticated;
+
+grant select, insert, update, delete
+  on public.study_settings, public.study_sessions, public.study_tasks
+  to authenticated;
 
 -- =====================================================================
 --  완료! 프로젝트 루트의 .env 에 아래 두 값을 넣고 npm run dev 하세요.
